@@ -5,51 +5,19 @@ import unittest
 
 
 def split_bill(price, discount, people):
-    """
-    divide la cuenta de una mesa
-    :param price: precio a dividir
-    :param discount: descuento, si no hay descuento el valor es 0. el valor representa el
-    porcentaje [0,100]
-    :param people: array con numeros de la parte que le corresponde a cada persona
-     Ej:
-     - si dividen 1 plato entre 3 seria [(1/3), (1/3), (1/3)]
-     - tambien pueden existir divisiones desiguales: 3 personas pero 1 de ellas paga la mitad
-        [(1/2), (1/4), (1/4)]
-    :return: array con el monto a pagar para cada persona despues de aplicar el descuento
-    Ej:
-    monto S/. 20 y people = [(1/2), (1/2)] => [10, 10]
-    """
-    raise NotImplementedError
-
-
-class SplitBillTestCase(unittest.TestCase):
-    def setUp(self):
-        return
-
-    def test_wrong_split(self):
-        s = split_bill(price=149.99, discount=15, people=[(1 / 2), (1 / 6), (1 / 6), (1 / 6)])
-        s = sum(s)
-        self.assertEquals(s, 127.49)
-
-    def test_right_sum(self):
-        s = split_bill(price=149.99, discount=15, people=[(1 / 7), (2 / 7), (1 / 7), (3 / 7)])
-        s = sum(s)
-        self.assertEquals(s, 127.49)
-
-    def wrong_sum(self):
-        s = split_bill(price=1, discount=0,
-                       people=[(1 / 10), (1 / 10), (1 / 10), (1 / 10), (1 / 10),
-                               (1 / 10), (1 / 10), (1 / 10), (1 / 10), (1 / 10)])
-        s = sum(s)
-        self.assertEquals(s, 1)
-
-import sys
-import getopt
-
-
-class Usage(Exception):
-    def __init__(self, msg):
-        self.msg = msg
+    if discount == 0:
+        pporpersona = list()
+        for ite in people:
+            var = ite*price
+            pporpersona.append(var)
+        return pporpersona
+    elif discount >= 0:
+        pporpersona = list()
+        disprice = (price*discount)/100
+        for ite in people:
+            var = ite*disprice
+            pporpersona.append(var)
+        return pporpersona
 
 
 def main(argv=None):
@@ -60,8 +28,8 @@ def main(argv=None):
             opts, args = getopt.getopt(argv[1:], 'h', ['help'])
         except getopt.error, msg:
             raise Usage(msg)
-        # more code, unchanged
-        # print sum([.4, .5, .1]) == 1
+       """ more code, unchanged
+         print sum([.4, .5, .1]) == 1"""
         unittest.main()
 
     except Usage, err:
