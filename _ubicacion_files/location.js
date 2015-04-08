@@ -1,10 +1,10 @@
 function obtenerdireccion(coords) {
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'LatLng' : coords}, function (results, status) {
+    geocoder.geocode({'latLng' : coords}, function (results, status) {
 
         if (status == google.maps.GeocoderStatus.OK) {
 
-            var address = result[0].address_components;
+            var address = results[0].address_components;
             var direccion = "", ciudad = "", distrito = "";
 
             if (address[0].long_name) {
@@ -93,14 +93,14 @@ FRDLocation.set_location = function (position) {
     google.maps.event.addListener(map, 'click', function(event) {
         coords = event.latLng;
         Marker.setPosition(coords);
-        //document.getElementById("inputAddress").value = coords;
+       // document.getElementById("inputAddress").value = coords;
         obtenerdireccion(coords);
     });
 
 
     
      Marker.setMap(map);
-     obtenerdireccion(coords);
+    // obtenerdireccion(coords);
     
     
    
